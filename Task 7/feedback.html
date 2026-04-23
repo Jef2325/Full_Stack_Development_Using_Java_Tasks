@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Form</title>
+
+<style>
+    body {
+        font-family: Arial;
+    }
+
+    input, textarea {
+        display: block;
+        margin: 10px 0;
+        padding: 8px;
+    }
+
+    /* Hover highlight */
+    input:hover, textarea:hover {
+        background-color: #e6f7ff;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
+
+<script>
+// Reusable validation function
+function validateField(field, messageId) {
+    let value = field.value;
+
+    if (value.trim() === "") {
+        document.getElementById(messageId).innerText = "This field is required";
+    } else {
+        document.getElementById(messageId).innerText = "";
+    }
+}
+
+// Email validation
+function validateEmail(field) {
+    let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if (!pattern.test(field.value)) {
+        document.getElementById("emailError").innerText = "Invalid Email";
+    } else {
+        document.getElementById("emailError").innerText = "";
+    }
+}
+
+// Double-click submit
+function submitForm() {
+    alert("Feedback Submitted Successfully!");
+}
+</script>
+
+</head>
+
+<body>
+
+<h2>Feedback Form</h2>
+
+<form>
+
+    Name:
+    <input type="text" onkeyup="validateField(this, 'nameError')">
+    <span id="nameError" class="error"></span>
+
+    Email:
+    <input type="text" onkeyup="validateEmail(this)">
+    <span id="emailError" class="error"></span>
+
+    Feedback:
+    <textarea onkeyup="validateField(this, 'feedbackError')"></textarea>
+    <span id="feedbackError" class="error"></span>
+
+    <br>
+
+    <!-- Double click event -->
+    <button type="button" ondblclick="submitForm()">Submit (Double Click)</button>
+
+</form>
+
+</body>
+</html>
